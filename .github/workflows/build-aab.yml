@@ -1,7 +1,7 @@
 name: Build AAB with EAS
 
 on:
-  workflow_dispatch:  # permite ejecutarlo manualmente
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,8 +19,7 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Authenticate with EAS
-        run: eas login --token ${{ secrets.EXPO_TOKEN }}
-
-      - name: Build AAB
+      - name: Build AAB with EAS
         run: eas build --platform android --profile production --non-interactive
+        env:
+          EAS_ACCESS_TOKEN: ${{ secrets.EXPO_TOKEN }}
